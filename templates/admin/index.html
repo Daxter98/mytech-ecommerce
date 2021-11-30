@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% if user.is_superuser %}
+        {% include "admin/admin_dashboard.html" %}
+    {% elif perms.commerce %}
+        {% include "admin/almacenista_dashboard.html" %}
+    {% elif perms.ordenes %}
+        {% include "admin/finanzas_dashboard.html" %}
+    {% endif %}
+
+{% endblock %}
+
+{% block extrascript %}
+<script>
+    {% if user.is_superuser %}
+        const ctx = document.getElementById('chartBig1').getContext('2d')
+        const ventas_chart = new Chart(ctx, {{ ventas|safe }})
+
+        const product_chart_area = document.getElementById('chartProductos').getContext('2d')
+        const product_chart = new Chart(product_chart_area, {{ almacen|safe }})
+    {% elif perms.commerce %}
+    const product_chart_area = document.getElementById('chartProductos').getContext('2d')
+        const product_chart = new Chart(product_chart_area, {{ almacen|safe }})
+    {% elif perms.ordenes %}
+    const ctx = document.getElementById('chartBig1').getContext('2d')
+        const ventas_chart = new Chart(ctx, {{ ventas|safe }})
+    {% endif %}
+</script>
+{% endblock %}

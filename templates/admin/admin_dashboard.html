@@ -1,0 +1,129 @@
+{% load i18n static %}
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 {{ direction.panel }}">
+                            <h5 class="card-category">{% trans "Total de Ventas" %}</h5>
+                            <h2 class="card-title">{% trans "Ventas Diarias" %}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="chartBig1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 {{ direction.panel }}">
+                            <h5 class="card-category">{% trans "Ingreso de Productos" %}</h5>
+                            <h2 class="card-title">{% trans "Almacen" %}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="chartProductos"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin de Ventas Diarias-->
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 text-center">
+            <div class="card card-tasks {{ direction.reverse_panel }}">
+                <div class="card-header {{ direction.panel }}">
+                    <h6 class="title d-inline">{% trans 'Acciones Recientes' %}</h6>
+                    <p class="card-category d-inline">{% trans 'My actions' %}</p>
+                    {% load log %}
+                    {% get_admin_log 10 as admin_log for_user user %}
+                </div>
+                <div class="card-body">
+                    {% if admin_log %}
+                        <div class="table-full-width table-responsive">
+                            <table class="table">
+                                <tbody>
+                                {% for entry in admin_log %}
+                                    <tr>
+                                        <td class="text-center">
+                                            {% if entry.is_addition %}
+                                                <span class="fa fa-plus-circle text-success"></span>
+                                            {% endif %}
+                                            {% if entry.is_change %}
+                                                <span class="fa fa-edit text-warning"></span>
+                                            {% endif %}
+                                            {% if entry.is_deletion %}
+                                                <span class="fa fa-trash text-danger"></span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="{{ direction.panel }}">
+                                            <p class="title">{{ entry.object_repr }}</p>
+                                            {% if entry.content_type %}
+                                                <p class="text-muted">
+                                                    {% filter capfirst %}{{ entry.content_type }}{% endfilter %}</p>
+                                            {% else %}
+                                                <p class="text-muted">{% trans 'Unknown content' %}</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="td-actions">
+                                            <a href="{{ entry.get_admin_url }}" type="button" rel="tooltip" title=""
+                                               class="btn btn-link"
+                                               data-original-title="{{ entry.object_repr }}">
+                                                <i class="tim-icons icon-settings"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>{% trans 'None available' %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!--Usuarios-->
+        <div class="col-lg-6 col-sm-6">
+            <div class="card ">
+                <div class="card-header {{ direction.panel }}">
+                    <h6 class="title d-inline">{% trans 'Empleados' %}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter " id="">
+                            <tbody>
+                                {% for usuario in usuarios %}
+                                    {% if usuario.is_staff and not usuario.is_superuser %}
+                                        <tr>
+                                            <td class="text-center">
+                                                <span class="fa fa-user text-success"> </span>
+                                            </td>
+                                            <td class="{{ direction.panel }}">
+                                                <p class="title">{{ usuario.first_name }} {{usuario.last_name}}</p>
+                                                <p class="text-muted">{{ usuario.username}}</p>
+                                                <p>
+                                                    <strong>Ultimo Login: </strong><span class="text-muted"> {{usuario.last_login}}</span> 
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

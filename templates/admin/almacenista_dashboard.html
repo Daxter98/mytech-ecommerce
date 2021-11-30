@@ -1,0 +1,39 @@
+{% load i18n static %}
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 {{ direction.panel }}">
+                            <h5 class="card-category">{% trans "Ingreso de Productos" %}</h5>
+                            <h2 class="card-title">{% trans "Almacen" %}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="chartProductos"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 {{ direction.panel }}">
+                            <h5 class="card-category">{% trans "Reportes" %}</h5>
+                            <h2 class="card-title">{% trans "Generación de Reportes" %}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                        <a href="{% url 'reporte_productos' %}" target="_blank" class="btn btn-outline-primary" role="button">Inventario Actual</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

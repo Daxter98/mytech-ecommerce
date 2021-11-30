@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    @page{
+        size: letter landscape;
+        margin: 2cm;
+    }
+
+    .data-center{
+        text-align: center;
+    }
+
+    thead th{
+        background-color: aquamarine;
+        font-style: italic;
+    }
+
+
+    table{
+        border: 1px solid black;
+        padding: 1rem;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+</style>
+<title>Inventario | E-Commerce</title>
+</head>
+<body>
+    <h1>MyTech E-Commerce | Inventario</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha de Ingreso</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th>Existencias</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for producto in stock%}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td class="data-center">{{ producto.fecha_entrada|date }}</td>
+                    <td class="data-center">{{ producto.categoria_id }}</td>
+                    <td class="data-center">${{ producto.precio }} MXN</td>
+                    <td class="data-center">{{ producto.stock }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4">Existencias Totales</th>
+                <td class="data-center">{{total}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

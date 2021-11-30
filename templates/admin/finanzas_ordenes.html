@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    @page{
+        size: letter landscape;
+        margin: 2cm;
+    }
+
+    .data-center{
+        text-align: center;
+    }
+
+    thead th{
+        background-color: cadetblue;
+        font-style: italic;
+    }
+
+
+    table{
+        border: 1px solid black;
+        padding: 1rem;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+</style>
+<title>Ordenes | E-Commerce</title>
+</head>
+<body>
+    <h1>MyTech E-Commerce | Ordenes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Orden</th>
+                <th>Fecha de Orden</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for orden in ordenes %}
+                <tr>
+                    <td>{{ orden.id }}</td>
+                    <td class="data-center">{{ orden.fecha }}</td>
+                    <td class="data-center">$ {{ orden.total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2">Venta Total</th>
+                <td class="data-center">$ {{ totales }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</html>
