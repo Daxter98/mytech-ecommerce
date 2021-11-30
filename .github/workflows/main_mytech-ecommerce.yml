@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'mytech-ecommerce'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_311B1323769441119306C4D9CBFFF5EA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1826FE0230424BEDA9573F9B6F9297B1 }}
