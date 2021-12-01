@@ -11,11 +11,16 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import mimetypes
+import mimetypes, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -26,7 +31,7 @@ SECRET_KEY = 'django-insecure-dy@@se&u#)5dvuxd*lg)ha-$d(%pn@_(yycxwpkl=he8jrnji4
 STRIPE_SECRET_KEY = 'sk_test_51Juf1yBYZqFfPrghMgsrdzz4CkF09syDDHv4orwFWLSwlMj9g75H8cEd4yImMgcFIIFlZVMBGpc8gcPerAOwoNYY00EpU1nRo2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,6 +64,7 @@ CORS_ALLOWED_ORIGINS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -139,10 +145,14 @@ USE_TZ = True
 
 STATIC_DIR = BASE_DIR / 'static'
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
 STATIC_DIRS = [STATIC_DIR]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 
 mimetypes.add_type("text/html", ".html", True)
 mimetypes.add_type("text/css", ".css", True)
