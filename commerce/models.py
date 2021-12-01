@@ -44,18 +44,18 @@ class Producto(models.Model):
 
     def get_image(self):
         if self.imagen:
-            return 'http://127.0.0.1:8000' + self.imagen.url
+            return 'https://mytech-ecommerce.azurewebsites.net/' + self.imagen.url
         return ''
     
     def get_miniatura(self):
         if self.miniatura:
-            return 'http://127.0.0.1:8000' + self.miniatura.url
+            return 'https://mytech-ecommerce.azurewebsites.net/' + self.miniatura.url
         else:
             if self.imagen:
                 self.miniatura = self.make_thumbnail(self.imagen)
                 self.save()
 
-                return 'http://127.0.0.1:8000' + self.miniatura.url
+                return 'https://mytech-ecommerce.azurewebsites.net/' + self.miniatura.url
             else:
                 return ''
 
