@@ -28,7 +28,7 @@ class Producto(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     imagen = models.ImageField(upload_to='uploads/', blank=True, null=True)
-    miniatura = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    miniatura = models.ImageField(upload_to='thumbnails/', blank=True, null=True)
     fecha_entrada = models.DateTimeField(auto_now_add=True)
     stock = models.PositiveSmallIntegerField(default=0)
 
@@ -44,18 +44,18 @@ class Producto(models.Model):
 
     def get_image(self):
         if self.imagen:
-            return 'https://mytech-ecommerce.azurewebsites.net' + self.imagen.url
+            return self.imagen.url
         return ''
     
     def get_miniatura(self):
         if self.miniatura:
-            return 'https://mytech-ecommerce.azurewebsites.net' + self.miniatura.url
+            return self.miniatura.url
         else:
             if self.imagen:
                 self.miniatura = self.make_thumbnail(self.imagen)
                 self.save()
 
-                return 'https://mytech-ecommerce.azurewebsites.net' + self.miniatura.url
+                return self.miniatura.url
             else:
                 return ''
 

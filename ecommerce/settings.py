@@ -16,12 +16,6 @@ import mimetypes, os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -31,7 +25,7 @@ SECRET_KEY = 'django-insecure-dy@@se&u#)5dvuxd*lg)ha-$d(%pn@_(yycxwpkl=he8jrnji4
 STRIPE_SECRET_KEY = 'sk_test_51Juf1yBYZqFfPrghMgsrdzz4CkF09syDDHv4orwFWLSwlMj9g75H8cEd4yImMgcFIIFlZVMBGpc8gcPerAOwoNYY00EpU1nRo2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -53,6 +47,7 @@ INSTALLED_APPS = [
     'djoser',
     'ordenes',
     'stripe',
+    'storages'
 ]
 
 # CORS (Cross-Origin Resource Sharing) Permite utilizar los datos del back en el front
@@ -153,11 +148,18 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-
-mimetypes.add_type("text/html", ".html", True)
-mimetypes.add_type("text/css", ".css", True)
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Storage
+DEFAULT_FILE_STORAGE = 'ecommerce.custom_azure.AzureMediaStorage'
+
+MEDIA_LOCATION = "media"
+
+AZURE_ACCOUNT_NAME = "mytechmediastorage"
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
