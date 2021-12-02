@@ -7,7 +7,7 @@ from commerce.views import AlmacenPDFView
 
 from ordenes.views import OrdenesPDFView
 
-admin.site.site_url = 'http://localhost:8080/'
+admin.site.site_url = 'https://polite-sand-0e67d3410.azurestaticapps.net/'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
