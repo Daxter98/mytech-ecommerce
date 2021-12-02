@@ -54,7 +54,8 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "http://192.168.1.74:8080"
+    "http://192.168.1.74:8080",
+    "https://polite-sand-0e67d3410.azurestaticapps.net/"
 ]
 
 MIDDLEWARE = [
