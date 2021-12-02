@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import mimetypes, os
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-dy@@se&u#)5dvuxd*lg)ha-$d(%pn@_(yycxwpkl=he8jrnji4
 STRIPE_SECRET_KEY = 'sk_test_51Juf1yBYZqFfPrghMgsrdzz4CkF09syDDHv4orwFWLSwlMj9g75H8cEd4yImMgcFIIFlZVMBGpc8gcPerAOwoNYY00EpU1nRo2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
