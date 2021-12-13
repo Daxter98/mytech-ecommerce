@@ -1,5 +1,5 @@
 # mytech-ecommerce
-Proyecto creada para la materia de ISW UPIICSA 3CM51
+Proyecto creado para la materia de ISW UPIICSA 3CM51
 
 # Profesor
 Mtro. Oskar Coronel
